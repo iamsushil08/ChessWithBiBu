@@ -32,7 +32,10 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 ALLOWED_HOSTS = [  "127.0.0.1",
     "localhost",
-    ".onrender.com",]
+    ".onrender.com",
+    "bibekpandey01.com.np",
+    "www.bibekpandey01.com.np",
+    ]
 
 
 # Application definition
