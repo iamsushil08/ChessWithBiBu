@@ -1,6 +1,6 @@
 from django.db import models 
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
+from cloudinary.models import CloudinaryField
 class Product(models.Model):
     name=models.CharField(max_length=100)
     price=models.FloatField()
@@ -21,7 +21,7 @@ class Contact(models.Model):
     
 class Gallery(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='gallery/')
+    image = CloudinaryField('image')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
