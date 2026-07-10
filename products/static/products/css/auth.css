@@ -1,0 +1,247 @@
+/* =========================================================
+   NOSE GAMBIT — Auth pages (Login / Register)
+   Full-black page, single card treated like a raised chess
+   square. Relies on tokens defined in style.css (:root vars).
+   ========================================================= */
+
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-black);
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--nav-height) + 40px) 24px 60px;
+}
+
+/* Faint checkerboard texture in the background, kept quiet */
+.checker-backdrop {
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-conic-gradient(var(--color-black-soft) 0% 25%, transparent 0% 50%) 0 0 / 64px 64px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.auth-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    background: var(--color-black);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 56px 44px;
+    text-align: center;
+}
+
+.auth-card .eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-grey-500);
+    margin-bottom: 20px;
+}
+
+.auth-logo {
+    display: block;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.9rem;
+    color: var(--color-white);
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--color-grey-500);
+    margin-bottom: 36px;
+}
+
+.auth-form {
+    text-align: left;
+}
+
+.auth-form .field {
+    margin-bottom: 22px;
+}
+
+.auth-form label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-grey-500);
+    margin-bottom: 8px;
+}
+
+.auth-form input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-white);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 10px 0;
+    transition: border-color 0.25s var(--ease);
+}
+
+.auth-form input::placeholder {
+    color: var(--color-grey-700);
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--color-white);
+}
+
+.auth-form button {
+    width: 100%;
+    margin-top: 14px;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 15px 0;
+    background: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid var(--color-white);
+    cursor: pointer;
+    transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.auth-form button:hover {
+    background: transparent;
+    color: var(--color-white);
+}
+
+.switch {
+    margin-top: 30px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--color-grey-500);
+}
+
+.switch a {
+    color: var(--color-white);
+    border-bottom: 1px solid var(--color-white);
+    transition: opacity 0.25s var(--ease);
+}
+
+.switch a:hover {
+    opacity: 0.7;
+}
+
+/* =========================================================
+   Django form.as_p output (used by register.html)
+   form.as_p renders each field as its own <p> containing
+   a <label> and <input> — style those directly since there
+   are no custom wrapper divs to hook into.
+   ========================================================= */
+
+.auth-form p {
+    margin-bottom: 22px;
+}
+
+.auth-form p label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-grey-500);
+    margin-bottom: 8px;
+}
+
+.auth-form p input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-white);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 10px 0;
+    transition: border-color 0.25s var(--ease);
+}
+
+.auth-form p input:focus {
+    outline: none;
+    border-color: var(--color-white);
+}
+
+.auth-form p .helptext {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--color-grey-700);
+    margin-top: 6px;
+}
+
+.auth-form ul.errorlist {
+    list-style: none;
+    margin: 0 0 8px;
+    padding: 0;
+}
+
+.auth-form ul.errorlist li {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 2px solid var(--color-white);
+    padding: 8px 12px;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 44px 28px;
+    }
+}
+
+/* =========================================================
+   Password visibility toggle (injected by password-toggle.js)
+   ========================================================= */
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"] {
+    padding-right: 32px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 4px;
+    display: flex;
+    color: var(--color-grey-500);
+    cursor: pointer;
+    transition: color 0.2s var(--ease);
+}
+
+.password-toggle:hover {
+    color: var(--color-white);
+}
+
+.password-toggle:focus-visible {
+    outline: 1px solid var(--color-white);
+    outline-offset: 2px;
+}

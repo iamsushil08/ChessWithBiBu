@@ -1,0 +1,186 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/home.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- ============ HERO — "The Opening" ============ -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-copy">
+            <span class="eyebrow">The Opening</span>
+            <h1 class="hero-title">One move at a time.<br>No hands required.</h1>
+            <p class="hero-text">
+                Every match on this channel is played entirely with my nose.
+                Not a gimmick — a way of proving that a limitation is just
+                another position on the board, waiting to be turned around.
+            </p>
+            <div class="hero-actions">
+                <a href="https://youtube.com/@nose_gambit?si=MChjsVF9xSqTmg-u" target="_blank" class="btn-primary">Watch on YouTube</a>
+                <a href="#contact" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="checker-frame">
+                <img src="{% static 'products/images/chess.webp' %}" alt="Bibek playing chess using his nose">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ABOUT — "The Gambit" ============ -->
+<section id="about" class="about">
+    <div class="about-inner">
+        <span class="eyebrow eyebrow-dark">The Gambit</span>
+        <h2 class="about-title">About Nose Gambit</h2>
+
+        <div class="about-body">
+            <p class="about-text">
+                I'm <strong>Bibek</strong> from Nepal, the creator of <strong>Nose Gambit</strong> and <strong>Chess with Bibu</strong>.
+            </p>
+            <p class="about-text">
+                I live with a physical disability that makes it difficult for me to walk or use my hands,
+                so I play chess using only my nose. What many people see as a limitation, I chose to turn
+                into my greatest strength.
+            </p>
+            <p class="about-text">
+                Chess is more than a game for me — it is proof that determination can defeat obstacles.
+                Through my YouTube channel, I share my chess journey, challenges, wins, losses, and the
+                message that passion is stronger than circumstances.
+            </p>
+            <p class="about-text">
+                Nose Gambit is not just about chess; it's about resilience, courage, and inspiring people
+                to believe that no dream is too far, no matter the situation.
+            </p>
+        </div>
+
+        <blockquote class="about-highlight">
+            "I don't just play chess — I play to prove that impossible is just another move to overcome."
+        </blockquote>
+    </div>
+</section>
+
+<!-- ============ PULL QUOTE / CTA — "The Middlegame" ============ -->
+<section class="cta-section">
+    <span class="eyebrow">The Middlegame</span>
+    <h2 class="cta-heading">Every game is a gambit<br>worth playing.</h2>
+    <p class="cta-text">New matches, new lessons, every week — follow along and see where the next move leads.</p>
+    <div class="cta-buttons">
+        <a href="https://youtube.com/@nose_gambit?si=MChjsVF9xSqTmg-u" target="_blank" class="btn-primary btn-inverse">Watch the Journey</a>
+        <a href="#contact" class="btn-secondary btn-inverse">Contact</a>
+    </div>
+</section>
+
+<!-- ============ CONTACT — "The Endgame" ============ -->
+<section class="contact" id="contact">
+    <div class="contact-wrapper">
+
+        <div class="contact-left">
+            <span class="eyebrow eyebrow-dark">The Endgame</span>
+            <h2>Let's Chat, Reach Out to Us</h2>
+            <p class="desc">
+                Have questions or feedback? We're here to help.
+                Send us a message, and we'll respond within 24 hours.
+            </p>
+
+            <form method="post" class="contact-form">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="field">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" placeholder="First name">
+                    </div>
+                    <div class="field">
+                        <label>Last Name</label>
+                        <input type="text" name="last_name" placeholder="Last name" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="Email address" required>
+                </div>
+
+                <div class="field">
+                    <label>Message</label>
+                    <textarea name="message" placeholder="Leave us message" required></textarea>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" id="agree" required>
+                    <label for="agree">I agree to our friendly privacy policy</label>
+                </div>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-right">
+            <div class="contact-image">
+                <img src="{% static 'products/images/bee.jpg' %}" alt="">
+            </div>
+
+            <div class="info-card">
+                <div class="info">
+                    <div class="icon">✉</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>Bibekpandey90@gmail.com</p>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="icon">📞</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>9840596626</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-about">
+            <h3>Nose Gambit</h3>
+            <p>
+                A chess journey of determination and resilience.
+                Inspiring people through chess, creativity, and passion.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'home' %}#about">About</a></li>
+                <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                <li><a href="{% url 'home' %}#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-social">
+            <h4>Follow</h4>
+            <a href="https://youtube.com/@nose_gambit?si=MChjsVF9xSqTmg-u" target="_blank">▶ YouTube</a>
+            <a href="https://www.tiktok.com/@nose_gambit10" target="_blank">♫ TikTok</a>
+            <a href="https://www.instagram.com/nose_gambit?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/NoseGambit" target="_blank">f Facebook</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Nose Gambit. All rights reserved.</p>
+    </div>
+</footer>
+
+{% endblock %}
+

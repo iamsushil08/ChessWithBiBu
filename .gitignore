@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Environment Variables
+.env
+
+# Django
+staticfiles/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db

@@ -1,0 +1,62 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block title %}Support{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/donation.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- ============ HERO — the ask, stated plainly ============ -->
+<section class="donate-hero">
+    <span class="eyebrow">Support The Journey</span>
+    <h1 class="donate-title">Every game here is played<br>one nose-move at a time.</h1>
+    <p class="donate-text">
+        If Nose Gambit has made you smile, taught you something, or reminded you
+        that limits are just positions waiting to be turned around — here's how
+        you can help keep the board running.
+    </p>
+</section>
+
+<!-- ============ STORY — why it matters ============ -->
+<section class="donate-story">
+    <div class="donate-story-inner">
+        <span class="eyebrow eyebrow-dark">Why It Matters</span>
+        <h2 class="story-heading">More than a channel</h2>
+
+        <p class="story-text">
+            Playing chess without the use of my hands or legs means every video
+            takes longer to plan, record, and edit than it might for anyone else.
+            Camera angles, equipment, and even sitting comfortably in front of a
+            board all take extra thought and extra time.
+        </p>
+        <p class="story-text">
+            None of that has stopped me — and it never will. But a little support
+            from people who believe in what Nose Gambit stands for goes a long way
+            toward better equipment, more consistent uploads, and more room to
+            focus on chess instead of logistics.
+        </p>
+        <p class="story-text">
+            Whatever you're able to give, however small, genuinely helps — and it
+            never goes unnoticed. Thank you for being part of this game.
+        </p>
+    </div>
+</section>
+
+<!-- ============ QR / DONATE ACTION ============ -->
+<section class="donate-action">
+    <span class="eyebrow">Scan To Support</span>
+    <h2 class="action-heading">One scan. One move forward.</h2>
+
+    <div class="qr-card">
+        <div class="qr-frame">
+            <img src="{% static 'products/images/qr.jpg' %}" alt="Donation QR code">
+        </div>
+        <p class="qr-caption">Scan with eSewa, Khalti, or your mobile banking app</p>
+    </div>
+
+    <p class="action-note">Every contribution, big or small, is deeply appreciated.</p>
+</section>
+
+{% endblock %}

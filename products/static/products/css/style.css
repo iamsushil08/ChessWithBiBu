@@ -1,0 +1,366 @@
+/* =========================================================
+   NOSE GAMBIT — Global styles + Navbar
+   Palette: pure black / white / greys only (monochrome)
+   Display face: Cormorant Garamond (editorial serif, perfume-house feel)
+   Utility face: Jost (clean geometric sans, wide tracking)
+   ========================================================= */
+
+:root {
+    --color-black: #0a0a0a;
+    --color-black-soft: #141414;
+    --color-white: #ffffff;
+    --color-grey-100: #f4f4f4;
+    --color-grey-300: #cfcfcf;
+    --color-grey-500: #8a8a8a;
+    --color-grey-700: #3a3a3a;
+
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Jost', sans-serif;
+
+    --nav-height: 84px;
+    --nav-height-scrolled: 64px;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--color-white);
+    color: var(--color-black);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: var(--color-black);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: height 0.35s var(--ease), background 0.35s var(--ease);
+}
+
+.navbar.scrolled {
+    height: var(--nav-height-scrolled);
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(10px);
+}
+
+.nav-inner {
+    max-width: 1240px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo — serif, wide tracking, understated */
+.logo {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.65rem;
+    color: var(--color-white);
+    letter-spacing: 0.04em;
+    position: relative;
+    white-space: nowrap;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 1px;
+    background: var(--color-white);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+}
+
+.logo:hover::after {
+    transform: scaleX(1);
+}
+
+/* Nav links */
+.nav-panel {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav-links > li > a:not(.nav-cta):not(.nav-cta-ghost) {
+    position: relative;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-grey-300);
+    padding: 8px 0;
+    transition: color 0.25s var(--ease);
+}
+
+.nav-links > li > a:not(.nav-cta):not(.nav-cta-ghost)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--color-white);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease);
+}
+
+.nav-links > li > a:not(.nav-cta):not(.nav-cta-ghost):hover {
+    color: var(--color-white);
+}
+
+.nav-links > li > a:not(.nav-cta):not(.nav-cta-ghost):hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Auth buttons */
+.nav-cta-ghost,
+.nav-cta {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    border: 1px solid var(--color-white);
+    transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.nav-cta-ghost {
+    color: var(--color-white);
+    background: transparent;
+}
+
+.nav-cta-ghost:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-cta {
+    color: var(--color-black);
+    background: var(--color-white);
+}
+
+.nav-cta:hover {
+    background: var(--color-grey-300);
+}
+
+/* User dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.caret {
+    font-size: 0.7rem;
+    transition: transform 0.3s var(--ease);
+}
+
+.dropbtn[aria-expanded="true"] .caret {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    position: absolute;
+    top: calc(100% + 16px);
+    right: 0;
+    min-width: 180px;
+    background: var(--color-black-soft);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
+}
+
+.dropdown-content.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 14px 18px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-grey-300);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* =========================================================
+   MOBILE TOGGLE (hamburger)
+   ========================================================= */
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--color-white);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.nav-toggle.active span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 860px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: min(78vw, 360px);
+        background: var(--color-black);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        transform: translateX(100%);
+        transition: transform 0.4s var(--ease);
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-panel.show {
+        transform: translateX(0);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 28px;
+        padding: 100px 40px 40px;
+        width: 100%;
+    }
+
+    .nav-links > li {
+        width: 100%;
+    }
+
+    .nav-links > li > a:not(.nav-cta):not(.nav-cta-ghost) {
+        font-size: 0.95rem;
+    }
+
+    .nav-cta-ghost,
+    .nav-cta {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .dropdown-content {
+        position: static;
+        margin-top: 12px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none;
+        width: 100%;
+    }
+
+    .dropdown-content.show {
+        display: block;
+    }
+}
+
+@media (max-width: 420px) {
+    .nav-inner {
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

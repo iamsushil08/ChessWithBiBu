@@ -1,0 +1,30 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block title %}Gallery{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/gallery.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<section class="gallery-section">
+    <div class="gallery-header">
+        <span class="eyebrow eyebrow-dark">The Library</span>
+        <h2 class="gallery-heading">Gallery</h2>
+        <p class="gallery-sub">Moments from the board — every photo starts in black and white, until you look closer.</p>
+    </div>
+
+    <div class="gallery-grid">
+        {% for img in images %}
+        <div class="card">
+            <img src="{{ img.image.url }}" alt="{{ img.title }}">
+            <div class="overlay">
+                <p>{{ img.title }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

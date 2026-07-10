@@ -1,0 +1,46 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/auth.css' %}">
+{% endblock extra_css %}
+
+{% block extra_js %}
+<script src="{% static 'products/js/password-toggle.js' %}" defer></script>
+{% endblock extra_js %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="checker-backdrop"></div>
+
+    <div class="auth-card">
+        <span class="eyebrow">Continue The Game</span>
+        <a class="auth-logo" href="{% url 'home' %}">Nose Gambit</a>
+        <p class="subtitle">Login to your account</p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="switch">
+            Don't have an account?
+            <a href="{% url 'register' %}">Sign up</a>
+        </p>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nose Gambit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+</head>
+<body>
+    <header class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="{% url 'home' %}" class="logo">Nose Gambit</a>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-panel" id="navPanel">
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="{% url 'gallery' %}">Photos</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                    <li><a href="{% url 'donate' %}" class="nav-cta">Donate</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}{% endblock content %}
+
+    <script src="{% static 'products/js/navbar.js' %}" defer></script>
+    {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>
