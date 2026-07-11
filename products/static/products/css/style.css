@@ -73,16 +73,28 @@ a {
     justify-content: space-between;
 }
 
-/* Logo — serif, wide tracking, understated */
+/* Logo — image mark + serif wordmark, wide tracking, understated */
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.logo-mark {
+    height: 34px;
+    width: auto;
+    display: block;
+}
+
+.logo-text {
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 600;
     font-size: 1.65rem;
     color: var(--color-white);
     letter-spacing: 0.04em;
-    position: relative;
-    white-space: nowrap;
 }
 
 .logo::after {
@@ -353,8 +365,12 @@ a {
         padding: 0 20px;
     }
 
-    .logo {
+    .logo-text {
         font-size: 1.4rem;
+    }
+
+    .logo-mark {
+        height: 28px;
     }
 }
 

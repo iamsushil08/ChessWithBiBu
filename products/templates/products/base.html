@@ -14,7 +14,10 @@
 <body>
     <header class="navbar" id="navbar">
         <div class="nav-inner">
-            <a href="{% url 'home' %}" class="logo">Nose Gambit</a>
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'products/images/logo.png' %}" alt="Nose Gambit logo" class="logo-mark">
+                <span class="logo-text">Nose Gambit</span>
+            </a>
 
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
