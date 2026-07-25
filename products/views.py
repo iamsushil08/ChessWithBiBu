@@ -5,6 +5,8 @@ from .forms import ProductForm,RegisterForm
 from .models import Contact,Gallery
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.mail import send_mail, get_connection
+
 
 def home(request):
     if request.method == "POST":
@@ -20,9 +22,17 @@ def home(request):
             message=message
         )
         
-        send_mail(
-            subject=f"New Contact Form Submission from {first_name} {last_name}",
-            message=f"""
+        try:
+            print("Connecting to:", settings.EMAIL_HOST, settings.EMAIL_PORT)
+
+            connection = get_connection()
+            connection.open()
+
+            print("SMTP connection successful")
+
+            send_mail(
+                subject=f"New Contact Form Submission from {first_name} {last_name}",
+                message=f"""
 Name: {first_name} {last_name}
 
 Email: {email}
@@ -30,39 +40,25 @@ Email: {email}
 Message:
 {message}
 """,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=["chesswithbibu@gmail.com"],
-            fail_silently=False,
-        )
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=["chesswithbibu@gmail.com"],
+                fail_silently=False,
+            )
 
-        messages.success(request, "Message sent successfully!")
+            messages.success(request, "Message sent successfully!")
+
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print("EMAIL ERROR:", repr(e))
+            messages.error(request, f"Email Error: {e}")
+
         return redirect("home")
 
     return render(request, "products/home.html")
-
-    
-    
-def product_list(request):
-    if request.method == 'POST':
-        form=ProductForm(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-            form=ProductForm()
-            
-    return render(request,'products/list.html',{'form':form})
-
-
-def register(request):
-    if request.method == 'POST':
-        form=RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    else:
-        form=RegisterForm()
         
-    return render(request,'products/register.html',{'form':form})
+        
+  
 
 def login_view(request):
     if request.method == 'POST':
@@ -96,4 +92,7 @@ def gallery(request):
 
 
 def donate(request):
-    return render(request, 'products/donation.html')         
+    return render(request, 'products/donation.html')  
+
+
+       
