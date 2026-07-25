@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate ,login,logout
 from django.contrib import messages
 from .forms import ProductForm,RegisterForm
 from .models import Contact,Gallery
+from django.core.mail import send_mail
+from django.conf import settings
 
 def home(request):
     if request.method == "POST":
@@ -17,8 +19,28 @@ def home(request):
             email=email,
             message=message
         )
+        
+        send_mail(
+            subject=f"New Contact Form Submission from {first_name} {last_name}",
+            message=f"""
+Name: {first_name} {last_name}
 
-    return render(request,'products/home.html')
+Email: {email}
+
+Message:
+{message}
+""",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=["chesswithbibu@gmail.com"],
+            fail_silently=False,
+        )
+
+        messages.success(request, "Message sent successfully!")
+        return redirect("home")
+
+    return render(request, "products/home.html")
+
+    
     
 def product_list(request):
     if request.method == 'POST':
@@ -66,47 +88,7 @@ def logout_view(request):
     logout(request)
     return redirect('home')    
 
-def contact(request):
-    if request.method == "POST":
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-        
-        if not first_name:
-            messages.error(request, "First name is required.")
-            return redirect('/')
-
-        if not last_name:
-            messages.error(request, "Last name is required.")
-            return redirect('/')
-
-        if not email:
-            messages.error(request, "Email is required.")
-            return redirect('/')
-
-        if "@" not in email:
-            messages.error(request, "Enter valid email address.")
-            return redirect('/')
-
-        if not message:
-            messages.error(request, "Message cannot be empty.")
-            return redirect('/')
-
-        if len(message) < 10:
-            messages.error(request, "Message must be at least 10 characters.")
-            return redirect('/')
-
-        Contact.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            message=message
-        )
-
-        messages.success(request, "Message sent successfully!")  
-          
-    return render(request, 'products/home.html')       
+     
 
 def gallery(request):
     images = Gallery.objects.all()
