@@ -44,7 +44,7 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://bibekpandey01.com.np",
     "https://www.bibekpandey01.com.np",
-    "https://*.onrender.com",
+  
 ]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
