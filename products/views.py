@@ -43,12 +43,17 @@ Message:
             messages.success(request, "Message sent successfully!")
 
         except Exception as e:
-            print("Email Error:", e)
+            import traceback
+            print("========== EMAIL ERROR ==========")
+            print("Email Error:", repr(e))
+            traceback.print_exc()
+            print("=================================")
+
             messages.warning(
                 request,
-                "Your message was saved, but the email notification could not be sent.",
+                f"Email error: {e}",
             )
-
+        
         return redirect("home")
 
     return render(request, "products/home.html")
