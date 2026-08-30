@@ -36,7 +36,6 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 ALLOWED_HOSTS = [ 
     "127.0.0.1",
     "localhost",
-    "web-production-2e372.up.railway.app",
     ".onrender.com",
     "bibekpandey01.com.np",
     "www.bibekpandey01.com.np",
@@ -45,6 +44,7 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://bibekpandey01.com.np",
     "https://www.bibekpandey01.com.np",
+    "https://*.onrender.com",
 ]
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
