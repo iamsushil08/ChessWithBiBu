@@ -9,18 +9,33 @@ from .models import Contact, Gallery
 
 def home(request):
     if request.method == "POST":
+        print("========== CONTACT FORM POST ==========")
+
         first_name = request.POST.get("first_name")
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
         message = request.POST.get("message")
 
+        print("First Name:", first_name)
+        print("Last Name:", last_name)
+        print("Email:", email)
+        print("Message:", message)
+
         # Save contact message
-        Contact.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            message=message,
-        )
+        try:
+            contact = Contact.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                message=message,
+            )
+
+            print("CONTACT SAVED SUCCESSFULLY")
+            print("Contact ID:", contact.id)
+
+        except Exception as e:
+            print("DATABASE ERROR:", repr(e))
+            raise
 
         # Send email notification
         try:
@@ -30,9 +45,11 @@ def home(request):
 New Contact Form Submission
 
 Name: {first_name} {last_name}
+
 Email: {email}
 
 Message:
+
 {message}
                 """,
                 from_email=settings.DEFAULT_FROM_EMAIL,
@@ -40,23 +57,20 @@ Message:
                 fail_silently=False,
             )
 
+            print("EMAIL SENT SUCCESSFULLY")
             messages.success(request, "Message sent successfully!")
 
         except Exception as e:
-            import traceback
-            print("========== EMAIL ERROR ==========")
-            print("Email Error:", repr(e))
-            traceback.print_exc()
-            print("=================================")
-
+            print("EMAIL ERROR:", repr(e))
             messages.warning(
                 request,
-                f"Email error: {e}",
+                "Your message was saved, but the email notification could not be sent.",
             )
-        
+
         return redirect("home")
 
     return render(request, "products/home.html")
+
 
 
 def login_view(request):
